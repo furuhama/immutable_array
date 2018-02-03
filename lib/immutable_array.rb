@@ -1,5 +1,7 @@
 require "immutable_array/version"
 
 module ImmutableArray
-  # Your code goes here...
+  def self.hoge
+    puts 'hoge!'
+  end
 end
