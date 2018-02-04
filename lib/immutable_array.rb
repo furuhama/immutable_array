@@ -4,24 +4,12 @@ module ImmutableArray
   class ImmutableArray < Array
     def self.new(size=0, val=nil)
       if size.class == Array
-        puts 'array has come!'
-        size.recursive_freeze
+        Array.new(size).recursive_freeze
       else
-        puts 'size has come!'
+        # ここで引っかかる
+        # given 2, expected 0 となる
         Array.new(size, val).recursive_freeze
       end
-    end
-
-    # freeze elements recursively
-    def recursive_freeze
-      self.each { |x|
-        if x.class == Array
-          x.recursive_freeze
-        end
-
-        x.freeze
-      }
-      self.freeze
     end
 
     # prototype
@@ -38,6 +26,20 @@ module ImmutableArray
 
       self.map(&arg)
       self.send(arg)
+    end
+  end
+
+  class Array
+     # freeze elements recursively
+    def recursive_freeze
+      self.each { |x|
+        if x.class == Array
+          x.recursive_freeze
+        end
+
+        x.freeze
+      }
+      self.freeze
     end
   end
 end
