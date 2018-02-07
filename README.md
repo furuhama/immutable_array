@@ -30,7 +30,7 @@ To use this, first, you should write this where you wannna use
 using ImmutableArray
 ```
 
-Use `<<` operator for Array class objects, and set symbolized method after it.
+Override `<<` operator for Array class objects, and set symbolized method after it.
 
 ```ruby
 some_array << :method_name
@@ -43,11 +43,11 @@ I made this gem to make completely frozen Array.
 To do this,
 
 ```ruby:sample.rb
-using ImmutableArray # call this module when you wanna use
+using ImmutableArray
 
 arr = [1, 1, 2, 3, 5, 8]
 
-arr << :freeze
+arr << :freeze # arr becomes completely frozen
 ```
 
 That's all.
