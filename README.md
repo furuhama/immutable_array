@@ -26,13 +26,13 @@ This module refines Array class.
 
 To use this, first, you should write this where you wannna use
 
-```
+```ruby
 using ImmutableArray
 ```
 
 Use `<<` operator for Array class objects, and set symbolized method after it.
 
-```
+```ruby
 some_array << :method_name
 ```
 
@@ -42,7 +42,7 @@ I made this gem to make completely frozen Array.
 
 To do this,
 
-```
+```ruby:sample.rb
 using ImmutableArray # call this module when you wanna use
 
 arr = [1, 1, 2, 3, 5, 8]
@@ -56,7 +56,7 @@ That's all.
 
 To debug this, I defined `recursive_bool_check` for Array class refinement.
 
-```
+```ruby:debug.rb
 using ImmutableArray
 
 arr = ['hoge', 15, [10, 'にゃーん']]
