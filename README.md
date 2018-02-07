@@ -57,7 +57,10 @@ using ImmutableArray
 
 arr = ['hoge', 15, [10, 'にゃーん', [:piyopiyo, 9326]]] << :freeze
 
-p arr.recursive_bool_check(:frozen?) # this returns true, when all elements & itself returns true
+# `recursive_bool_check` returns true, when all elements & itself returns true
+
+p arr.recursive_bool_check(:frozen?)
+# => true
 ```
 
 ## Development
