@@ -33,6 +33,7 @@ module ImmutableArray
 
     # method for debugging
     def recursive_bool_check(method_sym, ok=true)
+      # check for elements recursively
       self.each { |element|
         if element.is_a?(Array)
           element.recursive_bool_check(method_sym, ok)
@@ -41,7 +42,10 @@ module ImmutableArray
         end
       }
 
-      # if no false state,
+      # check receiver itself
+      return false unless self.send(method_sym)
+
+      # if no false for all elements,
       # return true finally
       return true
     end
