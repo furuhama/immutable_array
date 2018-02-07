@@ -1,19 +1,7 @@
 require "immutable_array/version"
 
 module ImmutableArray
-  class ImmutableArray < Array
-    def self.new(size=0, val=nil)
-      if size.class == Array
-        Array.new(size).recursive_freeze
-      else
-        # ここで引っかかる
-        # given 2, expected 0 となる
-        Array.new(size, val).recursive_freeze
-      end
-    end
-
-    # prototype
-    #
+  refine Array do
     # Usage:
     # [1, 3, 6, 7] << :freeze
     #
@@ -21,25 +9,41 @@ module ImmutableArray
     #
     # and override '<<' operator
     # not to add element destructively
-    def <<(arg)
-      arg = arg.to_sym if arg.class == String
+    def <<(method_sym)
+      # argument should be Symbol class
+      raise ArgumentError unless method_sym.is_a?(Symbol)
 
-      self.map(&arg)
-      self.send(arg)
+      # self.map(&arg)
+      # self.send(arg)
+
+      self.recursive_exec(method_sym)
     end
-  end
 
-  class Array
-     # freeze elements recursively
-    def recursive_freeze
-      self.each { |x|
-        if x.class == Array
-          x.recursive_freeze
+    def recursive_exec(method_sym)
+      self.each { |element|
+        if element.is_a?(Array)
+          element.recursive_exec(method_sym)
+        else
+          element.send(method_sym)
         end
-
-        x.freeze
       }
-      self.freeze
+
+      self.send(method_sym)
+    end
+
+    # method for debugging
+    def recursive_bool_check(method_sym, ok=true)
+      self.each { |element|
+        if element.is_a?(Array)
+          element.recursive_bool_check(method_sym, ok)
+        else
+          return false unless element.send(method_sym)
+        end
+      }
+
+      # if no false state,
+      # return true finally
+      return true
     end
   end
 end
