@@ -22,7 +22,47 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This module refines Array class.
+
+To use this, first, you should write this where you wannna use
+
+```
+using ImmutableArray
+```
+
+Use `<<` operator for Array class objects, and set symbolized method after it.
+
+```
+some_array << :method_name
+```
+
+### Standard Usage
+
+I made this gem to make completely frozen Array.
+
+To do this,
+
+```
+using ImmutableArray # call this module when you wanna use
+
+arr = [1, 1, 2, 3, 5, 8]
+
+arr << :freeze
+```
+
+That's all.
+
+### Debug
+
+To debug this, I defined `recursive_bool_check` for Array class refinement.
+
+```
+using ImmutableArray
+
+arr = ['hoge', 15, [10, 'にゃーん']]
+
+p arr.recursive_bool_check(:frozen?) # this returns true, when all elements & itself returns true
+```
 
 ## Development
 
