@@ -1,9 +1,5 @@
 # ImmutableArray
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/immutable_array`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -14,7 +10,7 @@ gem 'immutable_array'
 
 And then execute:
 
-    $ bundle
+    $ bundle install
 
 Or install it yourself as:
 
@@ -59,7 +55,7 @@ To debug this, I defined `recursive_bool_check` for Array class refinement.
 ```ruby:debug.rb
 using ImmutableArray
 
-arr = ['hoge', 15, [10, 'にゃーん']]
+arr = ['hoge', 15, [10, 'にゃーん', [:piyopiyo, 9326]]] << :freeze
 
 p arr.recursive_bool_check(:frozen?) # this returns true, when all elements & itself returns true
 ```
